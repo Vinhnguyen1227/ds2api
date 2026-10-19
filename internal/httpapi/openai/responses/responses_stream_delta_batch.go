@@ -30,7 +30,7 @@ func (b *responsesDeltaBatch) flush() {
 	text := b.text.String()
 	switch b.kind {
 	case "reasoning":
-		b.runtime.sendEvent("response.reasoning.delta", openaifmt.BuildResponsesReasoningDeltaPayload(b.runtime.responseID, text))
+		b.runtime.sendEvent("response.reasoning.delta", openaifmt.BuildResponsesReasoningDeltaPayload(b.runtime.responseID, b.runtime.ensureMessageItemID(), text))
 	case "text":
 		b.runtime.emitTextDelta(text)
 	}

@@ -83,11 +83,15 @@ func BuildResponsesTextDonePayload(responseID, itemID string, outputIndex, conte
 	}
 }
 
-func BuildResponsesReasoningDeltaPayload(responseID, delta string) map[string]any {
+func BuildResponsesReasoningDeltaPayload(responseID, itemID, delta string) map[string]any {
+	if strings.TrimSpace(itemID) == "" {
+		itemID = responseID + "_reasoning"
+	}
 	return map[string]any{
 		"type":        "response.reasoning.delta",
 		"id":          responseID,
 		"response_id": responseID,
+		"item_id":     itemID,
 		"delta":       delta,
 	}
 }
